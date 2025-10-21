@@ -648,10 +648,9 @@ p {
     margin-bottom: var(--spacing-md);
 }
 
-.cta-content p {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-xl);
-    opacity: 0.9;
+.cta-description-white {
+    color: white !important;
+    opacity: 1 !important;
 }
 
 .cta-actions {
