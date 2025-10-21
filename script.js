@@ -322,5 +322,17 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    console.log('KNBR Marketing Agency website loaded successfully! 🚀');
+    // Video functionality
+    const playButtons = document.querySelectorAll('.play-button');
+    
+    playButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video');
+            console.log('Playing video:', videoId);
+            
+            // Здесь можно добавить логику для открытия модального окна с видео
+            // или перенаправления на YouTube/Vimeo
+            alert(`Воспроизведение видео: ${videoId}\n\nВ реальной версии здесь будет открыто видео или модальное окно с плеером.`);
+        });
+    });
 });
