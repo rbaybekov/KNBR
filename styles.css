@@ -139,6 +139,8 @@ img, ul, ol, li, section, article, header, footer {
     text-decoration: none;
     transition: all 0.2s ease;
     white-space: nowrap;
+    overflow: visible !important;
+    position: relative;
 }
 
 .btn-primary {
@@ -233,6 +235,8 @@ img, ul, ol, li, section, article, header, footer {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
+    overflow: visible !important;
+    position: relative;
 }
 
 .nav-link:hover {
@@ -1086,6 +1090,8 @@ img, ul, ol, li, section, article, header, footer {
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s ease;
+    overflow: visible !important;
+    position: relative;
 }
 
 .faq-question:hover {

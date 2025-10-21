@@ -1,6 +1,47 @@
 // KNBR Marketing Agency - Interactive Features
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Force cursor styles via JavaScript
+    function applyCursorStyles() {
+        // Force cursor on all interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-link, .faq-question, .play-button, .form-submit');
+        interactiveElements.forEach(element => {
+            element.style.cursor = 'pointer';
+            element.style.setProperty('cursor', 'pointer', 'important');
+            
+            // Apply to all children
+            const children = element.querySelectorAll('*');
+            children.forEach(child => {
+                child.style.cursor = 'pointer';
+                child.style.setProperty('cursor', 'pointer', 'important');
+            });
+        });
+        
+        // Force text cursor on form inputs
+        const formInputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea');
+        formInputs.forEach(input => {
+            input.style.cursor = 'text';
+            input.style.setProperty('cursor', 'text', 'important');
+            
+            const children = input.querySelectorAll('*');
+            children.forEach(child => {
+                child.style.cursor = 'text';
+                child.style.setProperty('cursor', 'text', 'important');
+            });
+        });
+        
+        console.log('Cursor styles applied via JavaScript');
+    }
+    
+    // Apply cursor styles immediately
+    applyCursorStyles();
+    
+    // Apply cursor styles after a short delay to ensure DOM is ready
+    setTimeout(applyCursorStyles, 100);
+    
+    // Apply cursor styles when window loads
+    window.addEventListener('load', applyCursorStyles);
+    
     // Mobile Navigation Toggle
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест курсоров</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-button { 
+            background: #007bff; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            margin: 10px;
+            cursor: pointer !important;
+        }
+        .test-button * { cursor: pointer !important; }
+        .test-link { 
+            color: #007bff; 
+            text-decoration: underline; 
+            margin: 10px;
+            cursor: pointer !important;
+        }
+        .test-link * { cursor: pointer !important; }
+        .test-input { 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            margin: 10px;
+            cursor: text !important;
+        }
+        .test-input * { cursor: text !important; }
+    </style>
+</head>
+<body>
+    <h1>Тест курсоров</h1>
+    
+    <h2>Кнопки (должен быть курсор pointer):</h2>
+    <button class="test-button" style="cursor: pointer !important;">Кнопка 1</button>
+    <button class="test-button" style="cursor: pointer !important;">Кнопка 2</button>
+    
+    <h2>Ссылки (должен быть курсор pointer):</h2>
+    <a href="#" class="test-link" style="cursor: pointer !important;">Ссылка 1</a><br>
+    <a href="#" class="test-link" style="cursor: pointer !important;">Ссылка 2</a>
+    
+    <h2>Поля ввода (должен быть курсор text):</h2>
+    <input type="text" class="test-input" style="cursor: text !important;" placeholder="Введите текст">
+    <input type="email" class="test-input" style="cursor: text !important;" placeholder="Введите email">
+    
+    <h2>Инструкции:</h2>
+    <p>1. Наведите мышь на кнопки - курсор должен стать "pointer" (рука)</p>
+    <p>2. Наведите мышь на ссылки - курсор должен стать "pointer" (рука)</p>
+    <p>3. Наведите мышь на поля ввода - курсор должен стать "text" (I-образный)</p>
+    <p>4. Курсор должен изменяться на всей области элемента, а не только на границе</p>
+    
+    <script>
+        console.log('Тест курсоров загружен');
+    </script>
+</body>
+</html>
