@@ -563,6 +563,30 @@ input[type="password"] *, textarea * {
     color: var(--text-primary);
 }
 
+.service-price {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .service-price {
+    background: var(--primary-color);
+    color: white;
+    -webkit-text-fill-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
 /* Solutions Section */
 .solutions {
     padding: var(--spacing-2xl) 0;
