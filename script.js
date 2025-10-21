@@ -334,6 +334,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // или перенаправления на YouTube/Vimeo
             alert(`Воспроизведение видео: ${videoId}\n\nВ реальной версии здесь будет открыто видео или модальное окно с плеером.`);
         });
+    // FAQ functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', function() {
+            const isActive = item.classList.contains('active');
+            
+            // Close all FAQ items
+            faqItems.forEach(faqItem => {
+                faqItem.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
     // Consultation form handling
     const consultationForm = document.getElementById('consultationForm');
     
