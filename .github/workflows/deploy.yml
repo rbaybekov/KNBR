@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
+    - name: Checkout
       uses: actions/checkout@v4
       
     - name: Setup Node.js
@@ -19,22 +19,13 @@ jobs:
       with:
         node-version: '18'
         
-    - name: Install dependencies (if package.json exists)
-      run: |
-        if [ -f package.json ]; then
-          npm ci
-        fi
-        
-    - name: Build project (if build script exists)
-      run: |
-        if [ -f package.json ] && npm run | grep -q "build"; then
-          npm run build
-        fi
-        
+    - name: Install dependencies
+      run: npm install
+      
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
-        cname: # Добавьте ваш домен здесь, если используете кастомный домен
+        publish_dir: .
+        cname: mores-moscow.ru
