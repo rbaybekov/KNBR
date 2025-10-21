@@ -227,6 +227,21 @@ input[type="button"] {
     color: var(--primary-color);
 }
 
+.nav-link.active {
+    color: var(--primary-color);
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary-color);
+}
+
 .nav-actions {
     display: flex;
     gap: var(--spacing-sm);

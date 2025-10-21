@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
             
-            if (targetElement) {
-                const headerHeight = document.querySelector('.nav').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
+            if (targetSection) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
                 
                 window.scrollTo({
                     top: targetPosition,
@@ -63,131 +63,125 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Close mobile menu if open
-                if (navMenu && navMenu.classList.contains('active')) {
+                if (navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     navToggle.classList.remove('active');
-                    document.body.style.overflow = '';
                 }
             }
         });
     });
 
     // Active navigation link highlighting
-    const sections = document.querySelectorAll('section[id]');
-    const navLinksArray = document.querySelectorAll('.nav-link');
-    
-    function updateActiveNavLink() {
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
         let current = '';
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 200) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            
+            if (window.pageYOffset >= sectionTop - headerHeight - 100) {
                 current = section.getAttribute('id');
             }
         });
         
-        navLinksArray.forEach(link => {
+        navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === '#' + current) {
                 link.classList.add('active');
             }
         });
-    }
-    
-    window.addEventListener('scroll', updateActiveNavLink);
-    updateActiveNavLink(); // Call once on load
+    });
 
     // Solutions tabs functionality
+    const tabButtons = document.querySelectorAll('.tab-btn');
     const solutionTabs = document.querySelectorAll('.solution-tab');
-    const solutionContents = document.querySelectorAll('.solution-content');
     
-    solutionTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
             const targetTab = this.getAttribute('data-tab');
             
             // Remove active class from all buttons and tabs
-            solutionTabs.forEach(btn => btn.classList.remove('active'));
-            solutionContents.forEach(content => content.classList.remove('active'));
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            solutionTabs.forEach(tab => tab.classList.remove('active'));
             
             // Add active class to clicked button
             this.classList.add('active');
             
-            // Show corresponding content
-            const targetTabElement = document.querySelector(`[data-content="${targetTab}"]`);
+            // Show corresponding tab content
+            const targetTabElement = document.getElementById(targetTab);
             if (targetTabElement) {
                 targetTabElement.classList.add('active');
             }
         });
     });
 
-    // Animated counters
-    const counters = document.querySelectorAll('.stat-number');
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-target'));
-                const duration = 2000;
-                const increment = target / (duration / 16);
-                let current = 0;
-                
-                const updateCounter = () => {
+    // Animated counters for hero stats
+    const animateCounters = () => {
+        const counters = document.querySelectorAll('.stat-number');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+            const increment = target / 100;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
                     current += increment;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-                
-                updateCounter();
-                counterObserver.unobserve(counter);
-            }
+                    counter.textContent = Math.ceil(current) + (counter.textContent.includes('%') ? '%' : '') + (counter.textContent.includes('+') ? '+' : '');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = counter.textContent;
+                }
+            };
+            
+            updateCounter();
         });
-    }, { threshold: 0.5 });
-    
-    counters.forEach(counter => counterObserver.observe(counter));
+    };
 
     // Intersection Observer for animations
-    const animatedElements = document.querySelectorAll('.feature-card, .solution-card, .case-card, .process-step');
-    const animationObserver = new IntersectionObserver((entries) => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                
+                // Trigger counter animation for hero stats
+                if (entry.target.classList.contains('hero-stats')) {
+                    animateCounters();
+                }
             }
         });
-    }, { threshold: 0.1 });
-    
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.feature-card, .solution-card, .case-card, .hero-stats');
     animatedElements.forEach(element => {
         element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
+        element.style.transform = 'translateY(30px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        animationObserver.observe(element);
+        observer.observe(element);
     });
 
     // Chart bars animation
     const chartBars = document.querySelectorAll('.chart-bar');
-    const chartObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bar = entry.target;
-                const percentage = bar.getAttribute('data-percentage');
-                bar.style.width = percentage + '%';
-                chartObserver.unobserve(bar);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    chartBars.forEach(bar => chartObserver.observe(bar));
+    chartBars.forEach((bar, index) => {
+        bar.style.animationDelay = `${index * 0.1}s`;
+    });
 
-    // Button ripple effect
+    // Button click animations
     const buttons = document.querySelectorAll('.btn');
-    
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
+            // Create ripple effect
             const ripple = document.createElement('span');
             const rect = this.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
@@ -207,60 +201,79 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Form handling
+    // Form handling (if forms exist)
     const forms = document.querySelectorAll('form');
-    
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Get form data
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
+            const inputs = this.querySelectorAll('input, textarea');
             
-            console.log('Form submitted:', data);
+            // Simple validation
+            let isValid = true;
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ef4444';
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
             
-            // Show success message
-            alert('Спасибо! Ваше сообщение отправлено.');
-            
-            // Reset form
-            this.reset();
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Отправляется...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            } else {
+                alert('Пожалуйста, заполните все обязательные поля');
+            }
         });
     });
 
     // Parallax effect for hero section
-    const hero = document.querySelector('.hero');
-    
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = scrolled * 0.5;
-            hero.style.transform = `translateY(${parallax}px)`;
-        });
-    }
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        
+        if (hero) {
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
 
     // Header background change on scroll
-    const header = document.querySelector('.nav');
-    
-    if (header) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.background = 'white';
-                header.style.backdropFilter = 'none';
-            }
-        });
-    }
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    });
 
-    // Lazy loading for images
+    // Lazy loading for images (if any are added later)
     const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries) => {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.getAttribute('data-src');
-                img.removeAttribute('data-src');
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
                 imageObserver.unobserve(img);
             }
         });
@@ -291,6 +304,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 opacity: 0;
             }
         }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
     `;
     document.head.appendChild(style);
 
@@ -306,8 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // или перенаправления на YouTube/Vimeo
             alert(`Воспроизведение видео: ${videoId}\n\nВ реальной версии здесь будет открыто видео или модальное окно с плеером.`);
         });
-    });
-
     // FAQ functionality
     const faqItems = document.querySelectorAll('.faq-item');
     
