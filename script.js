@@ -112,24 +112,61 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function updateActiveNavLink() {
         let current = '';
+        let closestSection = null;
+        let minDistance = Infinity;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 200) {
+            const scrollPosition = window.pageYOffset + 150; // Offset for better UX
+            
+            // Calculate distance from current scroll position to section
+            const distance = Math.abs(scrollPosition - sectionTop);
+            
+            // Check if we're in the section
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 current = section.getAttribute('id');
+                closestSection = section;
+            } else if (distance < minDistance) {
+                minDistance = distance;
+                closestSection = section;
             }
         });
         
+        // If no section is active, use the closest one
+        if (!current && closestSection) {
+            current = closestSection.getAttribute('id');
+        }
+        
+        // Update nav links with smooth transition
         navLinksArray.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
+            const isActive = link.getAttribute('href') === '#' + current;
+            
+            if (isActive && !link.classList.contains('active')) {
+                // Remove active class from all links first
+                navLinksArray.forEach(l => l.classList.remove('active'));
+                // Add active class with a small delay for smooth transition
+                setTimeout(() => {
+                    link.classList.add('active');
+                }, 50);
+            } else if (!isActive && link.classList.contains('active')) {
+                link.classList.remove('active');
             }
         });
+        
+        console.log('Active section:', current);
     }
     
-    window.addEventListener('scroll', updateActiveNavLink);
+    // Throttle scroll events for better performance
+    let scrollTimeout;
+    function throttledUpdateActiveNavLink() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(updateActiveNavLink, 10);
+    }
+    
+    window.addEventListener('scroll', throttledUpdateActiveNavLink);
     updateActiveNavLink(); // Call once on load
 
     // Solutions tabs functionality

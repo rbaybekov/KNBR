@@ -284,29 +284,67 @@ input[type="password"] *, textarea * {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: all 0.3s ease;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
     overflow: visible !important;
     position: relative;
 }
 
 .nav-link:hover {
     color: var(--primary-color);
+    transform: translateY(-1px);
 }
 
 .nav-link.active {
     color: var(--primary-color);
     position: relative;
+    font-weight: 600;
 }
 
 .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 0;
-    right: 0;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+    pointer-events: none;
+    animation: underlineExpand 0.4s ease-out forwards;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+@keyframes underlineExpand {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+/* Add hover effect for all nav links */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
     height: 2px;
     background: var(--primary-color);
+    border-radius: 1px;
+    transition: width 0.3s ease;
     pointer-events: none;
+}
+
+.nav-link:hover::before {
+    width: 60%;
 }
 
 .nav-actions {
