@@ -268,10 +268,9 @@ p {
     background-clip: text;
 }
 
-.hero-description {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-xl);
-    opacity: 0.9;
+.hero-description-white {
+    color: white !important;
+    opacity: 1 !important;
 }
 
 .hero-actions {
