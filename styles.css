@@ -90,137 +90,89 @@ p {
     color: var(--text-secondary);
 }
 
-/* Interactive Elements - Cursors - RADICAL FIX */
-* {
-    cursor: inherit;
-}
-
+/* Interactive Elements - Cursors - Smart Fix */
 /* Ensure all pseudo-elements don't interfere with cursors */
 *::before,
 *::after {
     pointer-events: none;
 }
 
-/* RADICAL: Force cursor on ALL elements inside interactive components */
-.btn,
-.btn *,
-.btn * *,
-.btn * * *,
-.btn * * * *,
-.btn * * * * * {
+/* Smart cursor application - only for specific interactive elements */
+.btn {
     cursor: pointer !important;
 }
 
-.nav-link,
-.nav-link *,
-.nav-link * *,
-.nav-link * * *,
-.nav-link * * * *,
-.nav-link * * * * * {
+.btn * {
     cursor: pointer !important;
 }
 
-.faq-question,
-.faq-question *,
-.faq-question * *,
-.faq-question * * *,
-.faq-question * * * *,
-.faq-question * * * * * {
+.nav-link {
     cursor: pointer !important;
 }
 
-.play-button,
-.play-button *,
-.play-button * *,
-.play-button * * *,
-.play-button * * * *,
-.play-button * * * * * {
+.nav-link * {
     cursor: pointer !important;
 }
 
-.form-submit,
-.form-submit *,
-.form-submit * *,
-.form-submit * * *,
-.form-submit * * * *,
-.form-submit * * * * * {
+.faq-question {
     cursor: pointer !important;
 }
 
-a,
-a *,
-a * *,
-a * * *,
-a * * * *,
-a * * * * * {
+.faq-question * {
     cursor: pointer !important;
 }
 
-button,
-button *,
-button * *,
-button * * *,
-button * * * *,
-button * * * * * {
+.play-button {
     cursor: pointer !important;
 }
 
-/* Text cursor for form inputs - RADICAL */
-input[type="text"],
-input[type="text"] *,
-input[type="text"] * *,
-input[type="text"] * * *,
-input[type="text"] * * * *,
-input[type="text"] * * * * *,
-input[type="email"],
-input[type="email"] *,
-input[type="email"] * *,
-input[type="email"] * * *,
-input[type="email"] * * * *,
-input[type="email"] * * * * *,
-input[type="tel"],
-input[type="tel"] *,
-input[type="tel"] * *,
-input[type="tel"] * * *,
-input[type="tel"] * * * *,
-input[type="tel"] * * * * *,
-input[type="password"],
-input[type="password"] *,
-input[type="password"] * *,
-input[type="password"] * * *,
-input[type="password"] * * * *,
-input[type="password"] * * * * *,
-textarea,
-textarea *,
-textarea * *,
-textarea * * *,
-textarea * * * *,
-textarea * * * * * {
+.play-button * {
+    cursor: pointer !important;
+}
+
+.form-submit {
+    cursor: pointer !important;
+}
+
+.form-submit * {
+    cursor: pointer !important;
+}
+
+a {
+    cursor: pointer !important;
+}
+
+a * {
+    cursor: pointer !important;
+}
+
+button {
+    cursor: pointer !important;
+}
+
+button * {
+    cursor: pointer !important;
+}
+
+/* Text cursor for form inputs */
+input[type="text"], input[type="email"], input[type="tel"], 
+input[type="password"], textarea {
     cursor: text !important;
 }
 
-/* Default cursor for non-interactive elements */
-body, div, span, p, h1, h2, h3, h4, h5, h6, 
-img, ul, ol, li, section, article, header, footer {
-    cursor: default !important;
+input[type="text"] *, input[type="email"] *, input[type="tel"] *,
+input[type="password"] *, textarea * {
+    cursor: text !important;
 }
 
 /* Additional CSS classes for forced cursors */
 .force-pointer-cursor,
-.force-pointer-cursor *,
-.force-pointer-cursor * *,
-.force-pointer-cursor * * *,
-.force-pointer-cursor * * * *,
-.force-pointer-cursor * * * * * {
+.force-pointer-cursor * {
     cursor: pointer !important;
 }
 
 .force-text-cursor,
-.force-text-cursor *,
-.force-text-cursor * *,
-.force-text-cursor * * *,
-.force-text-cursor * * * *,
-.force-text-cursor * * * * * {
+.force-text-cursor * {
     cursor: text !important;
 }
 

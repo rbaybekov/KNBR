@@ -1,74 +1,39 @@
 // KNBR Marketing Agency - Interactive Features
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Force cursor styles via JavaScript - RADICAL APPROACH
+    // Force cursor styles via JavaScript - Smart approach
     function applyCursorStyles() {
-        console.log('🔧 Applying RADICAL cursor styles...');
+        console.log('🔧 Applying smart cursor styles...');
         
-        // Force cursor on all interactive elements - RADICAL
+        // Force cursor on interactive elements
         const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-link, .faq-question, .play-button, .form-submit');
         interactiveElements.forEach(element => {
-            // Apply to element itself
             element.style.cursor = 'pointer';
             element.style.setProperty('cursor', 'pointer', 'important');
             
-            // Apply to ALL descendants (not just direct children)
-            const allDescendants = element.querySelectorAll('*');
-            allDescendants.forEach(descendant => {
-                descendant.style.cursor = 'pointer';
-                descendant.style.setProperty('cursor', 'pointer', 'important');
+            // Apply to direct children only
+            const children = element.querySelectorAll('> *');
+            children.forEach(child => {
+                child.style.cursor = 'pointer';
+                child.style.setProperty('cursor', 'pointer', 'important');
             });
-            
-            // Also apply via CSS class
-            element.classList.add('force-pointer-cursor');
         });
         
-        // Force text cursor on form inputs - RADICAL
+        // Force text cursor on form inputs
         const formInputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea');
         formInputs.forEach(input => {
-            // Apply to element itself
             input.style.cursor = 'text';
             input.style.setProperty('cursor', 'text', 'important');
-            
-            // Apply to ALL descendants
-            const allDescendants = input.querySelectorAll('*');
-            allDescendants.forEach(descendant => {
-                descendant.style.cursor = 'text';
-                descendant.style.setProperty('cursor', 'text', 'important');
-            });
-            
-            // Also apply via CSS class
-            input.classList.add('force-text-cursor');
         });
         
-        console.log('✅ RADICAL cursor styles applied to', interactiveElements.length, 'interactive elements');
-        console.log('✅ RADICAL cursor styles applied to', formInputs.length, 'form inputs');
+        console.log('✅ Smart cursor styles applied to', interactiveElements.length, 'interactive elements');
     }
     
-    // Apply cursor styles immediately
-    applyCursorStyles();
-    
-    // Apply cursor styles after a short delay to ensure DOM is ready
+    // Apply cursor styles after DOM is ready
     setTimeout(applyCursorStyles, 100);
-    setTimeout(applyCursorStyles, 500);
-    setTimeout(applyCursorStyles, 1000);
     
     // Apply cursor styles when window loads
     window.addEventListener('load', applyCursorStyles);
-    
-    // Apply cursor styles when DOM changes
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'childList') {
-                setTimeout(applyCursorStyles, 50);
-            }
-        });
-    });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
     
     // Mobile Navigation Toggle
     const navToggle = document.getElementById('navToggle');
