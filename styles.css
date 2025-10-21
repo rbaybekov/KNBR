@@ -90,7 +90,7 @@ p {
     color: var(--text-secondary);
 }
 
-/* Interactive Elements - Cursors - Enhanced */
+/* Interactive Elements - Cursors - RADICAL FIX */
 * {
     cursor: inherit;
 }
@@ -101,28 +101,101 @@ p {
     pointer-events: none;
 }
 
-/* Force cursor on all interactive elements */
-a, button, input[type="submit"], input[type="button"], 
-.nav-link, .btn, .faq-question, .play-button, .form-submit,
-.privacy-link, .footer-section a {
+/* RADICAL: Force cursor on ALL elements inside interactive components */
+.btn,
+.btn *,
+.btn * *,
+.btn * * *,
+.btn * * * *,
+.btn * * * * * {
     cursor: pointer !important;
 }
 
-/* Force cursor on all children of interactive elements */
-a *, button *, input[type="submit"] *, input[type="button"] *,
-.nav-link *, .btn *, .faq-question *, .play-button *, .form-submit *,
-.privacy-link *, .footer-section a * {
+.nav-link,
+.nav-link *,
+.nav-link * *,
+.nav-link * * *,
+.nav-link * * * *,
+.nav-link * * * * * {
     cursor: pointer !important;
 }
 
-/* Text cursor for form inputs */
-input[type="text"], input[type="email"], input[type="tel"], 
-input[type="password"], textarea, input[type="search"] {
-    cursor: text !important;
+.faq-question,
+.faq-question *,
+.faq-question * *,
+.faq-question * * *,
+.faq-question * * * *,
+.faq-question * * * * * {
+    cursor: pointer !important;
 }
 
-input[type="text"] *, input[type="email"] *, input[type="tel"] *,
-input[type="password"] *, textarea *, input[type="search"] * {
+.play-button,
+.play-button *,
+.play-button * *,
+.play-button * * *,
+.play-button * * * *,
+.play-button * * * * * {
+    cursor: pointer !important;
+}
+
+.form-submit,
+.form-submit *,
+.form-submit * *,
+.form-submit * * *,
+.form-submit * * * *,
+.form-submit * * * * * {
+    cursor: pointer !important;
+}
+
+a,
+a *,
+a * *,
+a * * *,
+a * * * *,
+a * * * * * {
+    cursor: pointer !important;
+}
+
+button,
+button *,
+button * *,
+button * * *,
+button * * * *,
+button * * * * * {
+    cursor: pointer !important;
+}
+
+/* Text cursor for form inputs - RADICAL */
+input[type="text"],
+input[type="text"] *,
+input[type="text"] * *,
+input[type="text"] * * *,
+input[type="text"] * * * *,
+input[type="text"] * * * * *,
+input[type="email"],
+input[type="email"] *,
+input[type="email"] * *,
+input[type="email"] * * *,
+input[type="email"] * * * *,
+input[type="email"] * * * * *,
+input[type="tel"],
+input[type="tel"] *,
+input[type="tel"] * *,
+input[type="tel"] * * *,
+input[type="tel"] * * * *,
+input[type="tel"] * * * * *,
+input[type="password"],
+input[type="password"] *,
+input[type="password"] * *,
+input[type="password"] * * *,
+input[type="password"] * * * *,
+input[type="password"] * * * * *,
+textarea,
+textarea *,
+textarea * *,
+textarea * * *,
+textarea * * * *,
+textarea * * * * * {
     cursor: text !important;
 }
 
@@ -130,6 +203,25 @@ input[type="password"] *, textarea *, input[type="search"] * {
 body, div, span, p, h1, h2, h3, h4, h5, h6, 
 img, ul, ol, li, section, article, header, footer {
     cursor: default !important;
+}
+
+/* Additional CSS classes for forced cursors */
+.force-pointer-cursor,
+.force-pointer-cursor *,
+.force-pointer-cursor * *,
+.force-pointer-cursor * * *,
+.force-pointer-cursor * * * *,
+.force-pointer-cursor * * * * * {
+    cursor: pointer !important;
+}
+
+.force-text-cursor,
+.force-text-cursor *,
+.force-text-cursor * *,
+.force-text-cursor * * *,
+.force-text-cursor * * * *,
+.force-text-cursor * * * * * {
+    cursor: text !important;
 }
 
 /* Buttons */
