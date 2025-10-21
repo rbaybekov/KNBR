@@ -92,24 +92,69 @@ p {
 
 /* Interactive Elements - Cursors */
 a {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 button {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 input[type="submit"],
 input[type="button"] {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .privacy-link {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .footer-section a {
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+/* Ensure cursor applies to entire button area */
+.btn {
+    cursor: pointer !important;
+}
+
+.btn * {
+    cursor: pointer !important;
+}
+
+/* Ensure cursor applies to entire nav link area */
+.nav-link {
+    cursor: pointer !important;
+}
+
+.nav-link * {
+    cursor: pointer !important;
+}
+
+/* Ensure cursor applies to entire FAQ question area */
+.faq-question {
+    cursor: pointer !important;
+}
+
+.faq-question * {
+    cursor: pointer !important;
+}
+
+/* Ensure cursor applies to entire play button area */
+.play-button {
+    cursor: pointer !important;
+}
+
+.play-button * {
+    cursor: pointer !important;
+}
+
+/* Ensure cursor applies to entire form submit area */
+.form-submit {
+    cursor: pointer !important;
+}
+
+.form-submit * {
+    cursor: pointer !important;
 }
 
 /* Buttons */
@@ -123,7 +168,6 @@ input[type="button"] {
     font-size: var(--font-size-base);
     font-weight: 500;
     text-decoration: none;
-    cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
 }
@@ -220,7 +264,6 @@ input[type="button"] {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
-    cursor: pointer;
 }
 
 .nav-link:hover {
@@ -822,7 +865,6 @@ input[type="button"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: all 0.3s ease;
     color: var(--primary-color);
 }
@@ -1074,7 +1116,6 @@ input[type="button"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     transition: all 0.3s ease;
 }
 
