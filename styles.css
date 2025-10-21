@@ -90,6 +90,28 @@ p {
     color: var(--text-secondary);
 }
 
+/* Interactive Elements - Cursors */
+a {
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+input[type="submit"],
+input[type="button"] {
+    cursor: pointer;
+}
+
+.privacy-link {
+    cursor: pointer;
+}
+
+.footer-section a {
+    cursor: pointer;
+}
+
 /* Buttons */
 .btn {
     display: inline-flex;
@@ -198,6 +220,7 @@ p {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
+    cursor: pointer;
 }
 
 .nav-link:hover {
@@ -634,6 +657,7 @@ p {
     font-weight: 500;
     color: var(--text-primary);
     font-size: var(--font-size-sm);
+    cursor: pointer;
 }
 
 .required {
@@ -649,6 +673,7 @@ p {
     transition: all 0.3s ease;
     background: white;
     color: var(--text-primary);
+    cursor: text;
 }
 
 .form-group input:focus,
