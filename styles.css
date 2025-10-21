@@ -1076,14 +1076,18 @@ p {
 }
 
 .faq-item.active .faq-answer {
-    max-height: 200px;
+    max-height: 400px;
     opacity: 1;
 }
 
 .faq-answer p {
     color: var(--text-secondary);
     line-height: 1.6;
-    margin: 0;
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
 }
 
 /* Footer */
