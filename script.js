@@ -155,6 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         console.log('Active section:', current);
+        console.log('Nav links found:', navLinksArray.length);
+        console.log('Sections found:', sections.length);
     }
     
     // Throttle scroll events for better performance
@@ -168,6 +170,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', throttledUpdateActiveNavLink);
     updateActiveNavLink(); // Call once on load
+    
+    // Force initial state
+    setTimeout(() => {
+        console.log('Forcing initial nav state...');
+        updateActiveNavLink();
+    }, 1000);
 
     // Solutions tabs functionality
     const solutionTabs = document.querySelectorAll('.solution-tab');

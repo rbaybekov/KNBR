@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест анимации меню</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --accent-color: #0056b3;
+            --text-primary: #333;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --radius-sm: 4px;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            height: 200vh; /* Для тестирования прокрутки */
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            overflow: visible !important;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+            pointer-events: none;
+            animation: underlineExpand 0.4s ease-out forwards;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+        
+        @keyframes underlineExpand {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .nav-link:hover::before {
+            width: 60%;
+        }
+        
+        .content {
+            margin-top: 100px;
+            padding: 20px;
+        }
+        
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .section:nth-child(1) { background: #f0f8ff; }
+        .section:nth-child(2) { background: #f0fff0; }
+        .section:nth-child(3) { background: #fff0f0; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="#section1" class="nav-link">Секция 1</a></li>
+            <li><a href="#section2" class="nav-link">Секция 2</a></li>
+            <li><a href="#section3" class="nav-link">Секция 3</a></li>
+        </ul>
+    </nav>
+    
+    <div class="content">
+        <div id="section1" class="section">Секция 1 - Прокрутите вниз</div>
+        <div id="section2" class="section">Секция 2 - Прокрутите дальше</div>
+        <div id="section3" class="section">Секция 3 - Конец</div>
+    </div>
+    
+    <script>
+        // Тестовая функция для анимации меню
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateActiveNavLink() {
+            let current = '';
+            let closestSection = null;
+            let minDistance = Infinity;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const scrollPosition = window.pageYOffset + 150;
+                
+                const distance = Math.abs(scrollPosition - sectionTop);
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                    closestSection = section;
+                } else if (distance < minDistance) {
+                    minDistance = distance;
+                    closestSection = section;
+                }
+            });
+            
+            if (!current && closestSection) {
+                current = closestSection.getAttribute('id');
+            }
+            
+            navLinks.forEach(link => {
+                const isActive = link.getAttribute('href') === '#' + current;
+                
+                if (isActive && !link.classList.contains('active')) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    setTimeout(() => {
+                        link.classList.add('active');
+                    }, 50);
+                } else if (!isActive && link.classList.contains('active')) {
+                    link.classList.remove('active');
+                }
+            });
+            
+            console.log('Active section:', current);
+        }
+        
+        let scrollTimeout;
+        function throttledUpdateActiveNavLink() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(updateActiveNavLink, 10);
+        }
+        
+        window.addEventListener('scroll', throttledUpdateActiveNavLink);
+        updateActiveNavLink();
+        
+        // Плавная прокрутка
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = document.querySelector('.nav').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
