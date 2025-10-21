@@ -334,5 +334,65 @@ document.addEventListener('DOMContentLoaded', function() {
             // или перенаправления на YouTube/Vimeo
             alert(`Воспроизведение видео: ${videoId}\n\nВ реальной версии здесь будет открыто видео или модальное окно с плеером.`);
         });
-    });
+    // Consultation form handling
+    const consultationForm = document.getElementById('consultationForm');
+    
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('.form-submit');
+            const btnText = submitButton.querySelector('.btn-text');
+            const btnLoading = submitButton.querySelector('.btn-loading');
+            
+            // Show loading state
+            submitButton.classList.add('loading');
+            submitButton.disabled = true;
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                problem: formData.get('problem')
+            };
+            
+            console.log('Form submitted:', data);
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Hide loading state
+                submitButton.classList.remove('loading');
+                submitButton.disabled = false;
+                
+                // Show success message
+                alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 30 минут.');
+                
+                // Reset form
+                this.reset();
+            }, 2000);
+        });
+        
+        // Phone number formatting
+        const phoneInput = consultationForm.querySelector('#phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    if (value.length <= 1) {
+                        value = '+7 (' + value;
+                    } else if (value.length <= 4) {
+                        value = '+7 (' + value.slice(1);
+                    } else if (value.length <= 7) {
+                        value = '+7 (' + value.slice(1, 4) + ') ' + value.slice(4);
+                    } else if (value.length <= 9) {
+                        value = '+7 (' + value.slice(1, 4) + ') ' + value.slice(4, 7) + '-' + value.slice(7);
+                    } else {
+                        value = '+7 (' + value.slice(1, 4) + ') ' + value.slice(4, 7) + '-' + value.slice(7, 9) + '-' + value.slice(9, 11);
+                    }
+                }
+                e.target.value = value;
+            });
+        }
+    }
 });
