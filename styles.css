@@ -95,6 +95,12 @@ p {
     cursor: inherit;
 }
 
+/* Ensure all pseudo-elements don't interfere with cursors */
+*::before,
+*::after {
+    pointer-events: none;
+}
+
 /* Force cursor on all interactive elements */
 a, button, input[type="submit"], input[type="button"], 
 .nav-link, .btn, .faq-question, .play-button, .form-submit,
@@ -256,6 +262,7 @@ img, ul, ol, li, section, article, header, footer {
     right: 0;
     height: 2px;
     background: var(--primary-color);
+    pointer-events: none;
 }
 
 .nav-actions {
@@ -622,6 +629,7 @@ img, ul, ol, li, section, article, header, footer {
     height: 3px;
     background: var(--accent-color);
     border-radius: 2px;
+    pointer-events: none;
 }
 
 .consultation-description {
@@ -909,6 +917,7 @@ img, ul, ol, li, section, article, header, footer {
     height: 2px;
     background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
     z-index: 1;
+    pointer-events: none;
 }
 
 .step-number {

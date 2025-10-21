@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Системный тест курсоров</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Тест 1: Базовые курсоры */
+        .test1-button {
+            background: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .test1-link {
+            color: #007bff;
+            text-decoration: underline;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            display: inline-block;
+        }
+        
+        /* Тест 2: Курсоры с overflow */
+        .test2-button {
+            background: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            overflow: hidden;
+        }
+        
+        /* Тест 3: Курсоры с position */
+        .test3-button {
+            background: #dc3545;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            position: relative;
+        }
+        
+        /* Тест 4: Курсоры с flexbox */
+        .test4-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #6f42c1;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        /* Тест 5: Курсоры с псевдоэлементами */
+        .test5-button {
+            background: #fd7e14;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            position: relative;
+        }
+        
+        .test5-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .test5-button:hover::before {
+            opacity: 1;
+        }
+        
+        /* Тест 6: Курсоры с дочерними элементами */
+        .test6-button {
+            background: #20c997;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .test6-button span {
+            font-weight: bold;
+        }
+        
+        .test6-button svg {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        
+        /* Тест 7: Курсоры с JavaScript */
+        .test7-button {
+            background: #6c757d;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        
+        /* Тест 8: Курсоры с !important */
+        .test8-button {
+            background: #e83e8c;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer !important;
+            margin: 10px;
+        }
+        
+        .test8-button * {
+            cursor: pointer !important;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .result {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .problem {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Системный тест курсоров</h1>
+    
+    <div class="instructions">
+        <h3>📋 Инструкции по тестированию:</h3>
+        <p>1. Наведите мышь на каждый элемент ниже</p>
+        <p>2. Проверьте, изменяется ли курсор на всей области элемента</p>
+        <p>3. Отметьте, где курсор работает правильно, а где только на границе</p>
+        <p>4. Откройте консоль браузера (F12) для просмотра логов</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 1: Базовые курсоры</h2>
+        <button class="test1-button">Кнопка с cursor: pointer</button>
+        <a href="#" class="test1-link">Ссылка с cursor: pointer</a>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 2: Курсоры с overflow: hidden</h2>
+        <button class="test2-button">Кнопка с overflow: hidden</button>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области (может быть проблемой)</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 3: Курсоры с position: relative</h2>
+        <button class="test3-button">Кнопка с position: relative</button>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 4: Курсоры с flexbox</h2>
+        <div class="test4-container">
+            <span>Flexbox контейнер с cursor: pointer</span>
+        </div>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 5: Курсоры с псевдоэлементами</h2>
+        <button class="test5-button">Кнопка с ::before псевдоэлементом</button>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 6: Курсоры с дочерними элементами</h2>
+        <button class="test6-button">
+            <span>Кнопка с</span>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        </button>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области, включая дочерние элементы</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 7: Курсоры с JavaScript</h2>
+        <button class="test7-button" id="js-button">Кнопка без CSS курсора</button>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" применяется через JavaScript</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест 8: Курсоры с !important</h2>
+        <button class="test8-button">Кнопка с cursor: pointer !important</button>
+        <p><strong>Ожидаемый результат:</strong> Курсор "pointer" на всей области с максимальным приоритетом</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>📊 Результаты тестирования</h2>
+        <div id="results">
+            <p>Проведите тестирование и отметьте результаты ниже:</p>
+            <ul>
+                <li>✅ Тест 1 (базовые): <span id="test1-result">Не проверен</span></li>
+                <li>✅ Тест 2 (overflow): <span id="test2-result">Не проверен</span></li>
+                <li>✅ Тест 3 (position): <span id="test3-result">Не проверен</span></li>
+                <li>✅ Тест 4 (flexbox): <span id="test4-result">Не проверен</span></li>
+                <li>✅ Тест 5 (псевдоэлементы): <span id="test5-result">Не проверен</span></li>
+                <li>✅ Тест 6 (дочерние элементы): <span id="test6-result">Не проверен</span></li>
+                <li>✅ Тест 7 (JavaScript): <span id="test7-result">Не проверен</span></li>
+                <li>✅ Тест 8 (!important): <span id="test8-result">Не проверен</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="problem">
+        <h3>🚨 Проблемы, которые нужно исправить:</h3>
+        <p>Если курсор меняется только на границе элемента, возможные причины:</p>
+        <ul>
+            <li>CSS свойство <code>overflow: hidden</code></li>
+            <li>Псевдоэлементы перекрывают область курсора</li>
+            <li>Дочерние элементы не наследуют курсор</li>
+            <li>Конфликт CSS правил</li>
+            <li>Проблемы с браузером или операционной системой</li>
+        </ul>
+    </div>
+    
+    <script>
+        console.log('🔍 Системный тест курсоров загружен');
+        
+        // Тест 7: Применение курсора через JavaScript
+        const jsButton = document.getElementById('js-button');
+        jsButton.style.cursor = 'pointer';
+        jsButton.style.setProperty('cursor', 'pointer', 'important');
+        
+        // Применение курсора ко всем дочерним элементам
+        const allButtons = document.querySelectorAll('button, .test4-container');
+        allButtons.forEach(button => {
+            const children = button.querySelectorAll('*');
+            children.forEach(child => {
+                child.style.cursor = 'pointer';
+                child.style.setProperty('cursor', 'pointer', 'important');
+            });
+        });
+        
+        console.log('✅ JavaScript курсоры применены');
+        
+        // Добавляем обработчики для отслеживания результатов
+        const testElements = document.querySelectorAll('.test1-button, .test2-button, .test3-button, .test4-container, .test5-button, .test6-button, .test7-button, .test8-button');
+        
+        testElements.forEach((element, index) => {
+            element.addEventListener('mouseenter', function() {
+                console.log(`🖱️ Тест ${index + 1}: Курсор наведен на элемент`);
+            });
+            
+            element.addEventListener('click', function() {
+                console.log(`🖱️ Тест ${index + 1}: Элемент кликнут`);
+            });
+        });
+    </script>
+</body>
+</html>
