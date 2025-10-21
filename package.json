@@ -1,21 +1,25 @@
 {
-  "name": "knbr-website",
+  "name": "knbr-marketing-agency",
   "version": "1.0.0",
-  "description": "KNBR company website",
+  "description": "KNBR - Маркетинговое агентство полного цикла. Реклама, продвижение, аналитика и креатив для вашего бизнеса.",
   "main": "index.html",
   "scripts": {
     "start": "npx http-server -p 8000",
     "dev": "npx live-server --port=8000",
     "build": "echo 'No build process needed for static site'",
-    "deploy": "gh-pages -d ."
+    "deploy": "gh-pages -d .",
+    "deploy-server": "./deploy.sh"
   },
   "keywords": [
-    "website",
-    "html",
-    "css",
-    "javascript"
+    "marketing",
+    "advertising",
+    "digital-marketing",
+    "seo",
+    "smm",
+    "analytics",
+    "knbr"
   ],
-  "author": "KNBR Team",
+  "author": "KNBR Marketing Agency",
   "license": "MIT",
   "devDependencies": {
     "gh-pages": "^6.0.0",
@@ -24,10 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/knbr-website.git"
+    "url": "git+https://github.com/knbr-agency/knbr-website.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/knbr-website/issues"
+    "url": "https://github.com/knbr-agency/knbr-website/issues"
   },
-  "homepage": "https://yourusername.github.io/knbr-website"
+  "homepage": "https://knbr.ru"
 }

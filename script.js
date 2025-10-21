@@ -1,7 +1,19 @@
-// Smooth scrolling for navigation links
+// KNBR Marketing Agency - Interactive Features
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scroll for navigation links
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+    }
+
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -11,26 +23,36 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
+                
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
             }
         });
     });
 
-    // Add active class to navigation links based on scroll position
+    // Active navigation link highlighting
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        const navLinks = document.querySelectorAll('.nav-link');
         
         let current = '';
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
+            const headerHeight = document.querySelector('.header').offsetHeight;
             
-            if (window.pageYOffset >= sectionTop - 200) {
+            if (window.pageYOffset >= sectionTop - headerHeight - 100) {
                 current = section.getAttribute('id');
             }
         });
@@ -43,44 +65,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Form submission handling
-    const contactForm = document.querySelector('form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Solutions tabs functionality
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const solutionTabs = document.querySelectorAll('.solution-tab');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
             
-            // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            const message = this.querySelector('textarea').value;
+            // Remove active class from all buttons and tabs
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            solutionTabs.forEach(tab => tab.classList.remove('active'));
             
-            // Simple validation
-            if (!name || !email || !message) {
-                alert('Пожалуйста, заполните все поля');
-                return;
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Show corresponding tab content
+            const targetTabElement = document.getElementById(targetTab);
+            if (targetTabElement) {
+                targetTabElement.classList.add('active');
             }
-            
-            // Simulate form submission
-            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-            
-            // Reset form
-            this.reset();
         });
-    }
+    });
 
-    // CTA button functionality
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function() {
-            document.querySelector('#about').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+    // Animated counters for hero stats
+    const animateCounters = () => {
+        const counters = document.querySelectorAll('.stat-number');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+            const increment = target / 100;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.ceil(current) + (counter.textContent.includes('%') ? '%' : '') + (counter.textContent.includes('+') ? '+' : '');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = counter.textContent;
+                }
+            };
+            
+            updateCounter();
         });
-    }
+    };
 
-    // Add animation on scroll
+    // Intersection Observer for animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -91,16 +122,208 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                
+                // Trigger counter animation for hero stats
+                if (entry.target.classList.contains('hero-stats')) {
+                    animateCounters();
+                }
             }
         });
     }, observerOptions);
 
-    // Observe service cards
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.feature-card, .solution-card, .case-card, .hero-stats');
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(element);
     });
+
+    // Chart bars animation
+    const chartBars = document.querySelectorAll('.chart-bar');
+    chartBars.forEach((bar, index) => {
+        bar.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    // Button click animations
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // Form handling (if forms exist)
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const inputs = this.querySelectorAll('input, textarea');
+            
+            // Simple validation
+            let isValid = true;
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ef4444';
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Отправляется...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            } else {
+                alert('Пожалуйста, заполните все обязательные поля');
+            }
+        });
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        
+        if (hero) {
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
+
+    // Header background change on scroll
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    });
+
+    // Lazy loading for images (if any are added later)
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+
+    // Add CSS for ripple effect
+    const style = document.createElement('style');
+    style.textContent = `
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .nav-menu.active {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-md);
+        }
+        
+        .nav-menu.active .nav-list {
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    console.log('KNBR Marketing Agency website loaded successfully! 🚀');
 });

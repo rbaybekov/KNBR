@@ -3,76 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KNBR - Главная страница</title>
+    <title>KNBR - Маркетинговое агентство полного цикла</title>
+    <meta name="description" content="KNBR - ведущее маркетинговое агентство. Реклама, продвижение, аналитика и креатив для вашего бизнеса.">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
             <div class="container">
-                <h1>KNBR</h1>
-                <ul>
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
+                <div class="nav-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-text">KNBR</span>
+                        <span class="logo-subtitle">Marketing Agency</span>
+                    </a>
+                </div>
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="#platform" class="nav-link">Платформа</a></li>
+                        <li><a href="#solutions" class="nav-link">Решения</a></li>
+                        <li><a href="#cases" class="nav-link">Кейсы</a></li>
+                        <li><a href="#resources" class="nav-link">Ресурсы</a></li>
+                        <li><a href="#support" class="nav-link">Поддержка</a></li>
+                    </ul>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-outline">Войти</button>
+                    <button class="btn btn-primary">Начать работу</button>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </nav>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="container">
-                <h2>Добро пожаловать в KNBR</h2>
-                <p>Ваш надежный партнер в мире технологий</p>
-                <button class="cta-button">Узнать больше</button>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="container">
-                <h2>О нас</h2>
-                <p>Мы команда профессионалов, специализирующихся на создании современных веб-решений.</p>
-            </div>
-        </section>
-
-        <section id="services" class="services">
-            <div class="container">
-                <h2>Наши услуги</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <h3>Веб-разработка</h3>
-                        <p>Создание современных веб-приложений</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Маркетинг, который <span class="highlight">работает</span>
+                    </h1>
+                    <p class="hero-description">
+                        Полный цикл маркетинговых услуг: от стратегии до аналитики. 
+                        Увеличиваем продажи и узнаваемость бренда с помощью современных инструментов.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large">Начать проект</button>
+                        <button class="btn btn-secondary btn-large">Посмотреть кейсы</button>
                     </div>
-                    <div class="service-card">
-                        <h3>Дизайн</h3>
-                        <p>Красивый и функциональный дизайн</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Успешных проектов</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">150%</span>
+                            <span class="stat-label">Средний рост продаж</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Поддержка клиентов</span>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <h3>Консалтинг</h3>
-                        <p>Экспертные консультации по технологиям</p>
+                </div>
+                <div class="hero-visual">
+                    <div class="dashboard-preview">
+                        <div class="dashboard-header">
+                            <div class="dashboard-tabs">
+                                <span class="tab active">Аналитика</span>
+                                <span class="tab">Кампании</span>
+                                <span class="tab">Отчеты</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-content">
+                            <div class="chart-container">
+                                <div class="chart-bar" style="height: 60%"></div>
+                                <div class="chart-bar" style="height: 80%"></div>
+                                <div class="chart-bar" style="height: 45%"></div>
+                                <div class="chart-bar" style="height: 90%"></div>
+                                <div class="chart-bar" style="height: 70%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2>Свяжитесь с нами</h2>
-                <form>
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Сообщение" required></textarea>
-                    <button type="submit">Отправить</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
+    <!-- Platform Features -->
+    <section id="platform" class="platform">
         <div class="container">
-            <p>&copy; 2024 KNBR. Все права защищены.</p>
+            <div class="section-header">
+                <h2 class="section-title">Все инструменты в одной платформе</h2>
+                <p class="section-description">
+                    Управляйте всеми аспектами маркетинга из единого интерфейса
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Реклама и продвижение</h3>
+                    <p>Создавайте и управляйте рекламными кампаниями во всех каналах</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Аналитика и отчеты</h3>
+                    <p>Получайте детальную аналитику эффективности ваших кампаний</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Креатив и дизайн</h3>
+                    <p>Профессиональные креативы и дизайн для ваших кампаний</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Управление клиентами</h3>
+                    <p>CRM-система для эффективной работы с клиентской базой</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions -->
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Решения для вашего бизнеса</h2>
+                <p class="section-description">
+                    Выберите подходящий пакет услуг для ваших задач
+                </p>
+            </div>
+            <div class="solutions-tabs">
+                <button class="tab-btn active" data-tab="startup">Стартапы</button>
+                <button class="tab-btn" data-tab="business">Бизнес</button>
+                <button class="tab-btn" data-tab="enterprise">Корпорации</button>
+            </div>
+            <div class="solutions-content">
+                <div class="solution-tab active" id="startup">
+                    <div class="solution-grid">
+                        <div class="solution-card">
+                            <h3>Быстрый старт</h3>
+                            <div class="price">от 50 000 ₽/мес</div>
+                            <ul class="features-list">
+                                <li>Настройка рекламы в Яндекс.Директ</li>
+                                <li>Создание лендингов</li>
+                                <li>Базовая аналитика</li>
+                                <li>Поддержка 24/7</li>
+                            </ul>
+                            <button class="btn btn-outline">Выбрать план</button>
+                        </div>
+                        <div class="solution-card featured">
+                            <div class="badge">Популярный</div>
+                            <h3>Полный цикл</h3>
+                            <div class="price">от 150 000 ₽/мес</div>
+                            <ul class="features-list">
+                                <li>Все каналы рекламы</li>
+                                <li>Контент-маркетинг</li>
+                                <li>SMM и email-маркетинг</li>
+                                <li>Детальная аналитика</li>
+                                <li>Персональный менеджер</li>
+                            </ul>
+                            <button class="btn btn-primary">Выбрать план</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases -->
+    <section id="cases" class="cases">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Успешные кейсы</h2>
+                <p class="section-description">
+                    Реальные результаты наших клиентов
+                </p>
+            </div>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-image">
+                        <div class="case-placeholder">E-commerce</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>Интернет-магазин электроники</h3>
+                        <p>Увеличили продажи на 200% за 6 месяцев</p>
+                        <div class="case-stats">
+                            <span class="stat">+200% продаж</span>
+                            <span class="stat">-30% стоимость клика</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-image">
+                        <div class="case-placeholder">SaaS</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>B2B SaaS платформа</h3>
+                        <p>Привлекли 1000+ новых клиентов</p>
+                        <div class="case-stats">
+                            <span class="stat">+1000 клиентов</span>
+                            <span class="stat">+150% конверсия</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-image">
+                        <div class="case-placeholder">Retail</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>Розничная сеть</h3>
+                        <p>Запустили омниканальную стратегию</p>
+                        <div class="case-stats">
+                            <span class="stat">+80% онлайн-продаж</span>
+                            <span class="stat">+120% узнаваемость</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Готовы увеличить продажи?</h2>
+                <p>Начните с бесплатной консультации и получите персональную стратегию</p>
+                <div class="cta-actions">
+                    <button class="btn btn-primary btn-large">Получить консультацию</button>
+                    <button class="btn btn-secondary btn-large">Скачать презентацию</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <span class="logo-text">KNBR</span>
+                        <span class="logo-subtitle">Marketing Agency</span>
+                    </div>
+                    <p>Маркетинговое агентство полного цикла. Помогаем бизнесу расти и развиваться.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li><a href="#">Контекстная реклама</a></li>
+                        <li><a href="#">SMM</a></li>
+                        <li><a href="#">SEO</a></li>
+                        <li><a href="#">Аналитика</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Компания</h4>
+                    <ul>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Команда</a></li>
+                        <li><a href="#">Карьера</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <div class="contact-info">
+                        <p>📧 hello@knbr.ru</p>
+                        <p>📞 +7 (495) 123-45-67</p>
+                        <p>📍 Москва, ул. Примерная, 1</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KNBR. Все права защищены.</p>
+                <div class="footer-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
         </div>
     </footer>
 
