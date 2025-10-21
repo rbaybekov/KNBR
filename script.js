@@ -9,6 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
         navToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close menu on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     }
 
@@ -291,18 +316,46 @@ document.addEventListener('DOMContentLoaded', function() {
         
         .nav-menu.active {
             display: block;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            background: white;
-            box-shadow: var(--shadow-lg);
-            padding: var(--spacing-md);
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            padding: var(--spacing-xl) var(--spacing-md);
+            overflow-y: auto;
         }
         
         .nav-menu.active .nav-list {
             flex-direction: column;
+            gap: var(--spacing-lg);
+            margin-top: 80px;
+        }
+        
+        .nav-menu.active .nav-link {
+            font-size: var(--font-size-lg);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--border-light);
+            display: block;
+            text-align: center;
+        }
+        
+        .nav-menu.active .nav-actions {
+            display: flex;
+            flex-direction: column;
             gap: var(--spacing-sm);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .nav-menu.active .nav-actions .btn {
+            width: 100%;
+            justify-content: center;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: var(--font-size-base);
         }
         
         .nav-toggle.active span:nth-child(1) {
