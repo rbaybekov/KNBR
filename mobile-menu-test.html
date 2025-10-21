@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Menu Test</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        .test-container { padding: 20px; }
+        .test-button { 
+            background: #6366f1; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            margin: 10px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+        }
+        .test-result { 
+            margin: 10px 0; 
+            padding: 10px; 
+            background: #f0f0f0; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Тест мобильного меню KNBR</h1>
+        <p>Откройте консоль браузера (F12) и проверьте:</p>
+        
+        <button class="test-button" onclick="testMobileMenu()">Тест мобильного меню</button>
+        
+        <div class="test-result" id="testResult">
+            Результат теста появится здесь...
+        </div>
+        
+        <h2>Инструкции:</h2>
+        <ol>
+            <li>Откройте сайт KNBR в браузере</li>
+            <li>Откройте инструменты разработчика (F12)</li>
+            <li>Переключитесь в режим мобильного устройства</li>
+            <li>Проверьте, что hamburger меню видно</li>
+            <li>Кликните по нему и проверьте, что меню открывается</li>
+            <li>Проверьте консоль на наличие сообщений</li>
+        </ol>
+        
+        <h2>Ожидаемое поведение:</h2>
+        <ul>
+            <li>На экранах меньше 768px должно быть видно hamburger меню (3 полоски)</li>
+            <li>При клике меню должно открываться на весь экран</li>
+            <li>В консоли должны быть сообщения о клике и открытии/закрытии меню</li>
+            <li>При клике вне меню оно должно закрываться</li>
+        </ul>
+    </div>
+
+    <script>
+        function testMobileMenu() {
+            const result = document.getElementById('testResult');
+            
+            // Проверяем, есть ли элементы на главной странице
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (navToggle && navMenu) {
+                result.innerHTML = `
+                    <strong>✅ Элементы найдены:</strong><br>
+                    - navToggle: ${navToggle ? 'найден' : 'не найден'}<br>
+                    - navMenu: ${navMenu ? 'найден' : 'не найден'}<br>
+                    <br>
+                    <strong>Следующие шаги:</strong><br>
+                    1. Переключитесь в мобильный режим (ширина < 768px)<br>
+                    2. Проверьте видимость hamburger меню<br>
+                    3. Кликните по нему и проверьте консоль
+                `;
+            } else {
+                result.innerHTML = `
+                    <strong>❌ Элементы не найдены</strong><br>
+                    Убедитесь, что вы находитесь на главной странице KNBR<br>
+                    <a href="http://localhost:8000" target="_blank">Открыть KNBR сайт</a>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
