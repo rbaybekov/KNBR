@@ -700,8 +700,9 @@ p {
     text-decoration: none;
 }
 
-.privacy-link:hover {
-    text-decoration: underline;
+.consultation-description-white {
+    color: white !important;
+    opacity: 1 !important;
 }
 
 /* Video Section */
