@@ -1,0 +1,33 @@
+{
+  "name": "knbr-website",
+  "version": "1.0.0",
+  "description": "KNBR company website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000",
+    "dev": "npx live-server --port=8000",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [
+    "website",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "KNBR Team",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/knbr-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/knbr-website/issues"
+  },
+  "homepage": "https://yourusername.github.io/knbr-website"
+}
