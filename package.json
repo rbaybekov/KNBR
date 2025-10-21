@@ -28,10 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/username/KNBR.git"
+    "url": "git+https://github.com/rbaybekov/KNBR.git"
   },
   "bugs": {
-    "url": "https://github.com/username/KNBR/issues"
+    "url": "https://github.com/rbaybekov/KNBR/issues"
   },
   "homepage": "https://mores-moscow.ru"
 }
