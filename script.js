@@ -5,16 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     
+    console.log('Nav toggle element:', navToggle);
+    console.log('Nav menu element:', navMenu);
+    
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', function() {
+            console.log('Toggle clicked');
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
             
             // Prevent body scroll when menu is open
             if (navMenu.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
+                console.log('Menu opened');
             } else {
                 document.body.style.overflow = '';
+                console.log('Menu closed');
             }
         });
         
@@ -312,68 +318,6 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 0;
             height: 2px;
             background: var(--primary-color);
-        }
-        
-        .nav-menu.active {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 9999;
-            padding: var(--spacing-xl) var(--spacing-md);
-            overflow-y: auto;
-        }
-        
-        .nav-menu.active .nav-list {
-            flex-direction: column;
-            gap: var(--spacing-lg);
-            margin-top: 80px;
-        }
-        
-        .nav-menu.active .nav-link {
-            font-size: var(--font-size-lg);
-            padding: var(--spacing-sm) 0;
-            border-bottom: 1px solid var(--border-light);
-            display: block;
-            text-align: center;
-        }
-        
-        .nav-menu.active .nav-actions {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-xl);
-            padding-top: var(--spacing-lg);
-            border-top: 1px solid var(--border-light);
-        }
-        
-        .nav-menu.active .nav-actions .btn {
-            width: 100%;
-            justify-content: center;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            font-size: var(--font-size-base);
-        }
-        
-        .nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
         }
     `;
     document.head.appendChild(style);
